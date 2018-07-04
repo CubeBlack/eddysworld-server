@@ -1,6 +1,6 @@
 <?php
 function __autoload($className){
-  $url = "engine2/$className.class.php";
+  $url = "engine/$className.class.php";
   require_once $url;
 }
 // variaveis globais

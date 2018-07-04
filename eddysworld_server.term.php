@@ -1,5 +1,8 @@
 <?php
-	//header("Content-type: text/html; charset=utf-8");
+    header('Access-Control-Allow-Origin:*');
+    header('Access-Control-Max-Age: 3628800');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Content-type: text/plain');
 	require_once("eddysworld_server.php");
 	
 	

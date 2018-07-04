@@ -60,3 +60,8 @@ CREATE TABLE IF NOT EXISTS `ew_dialogo`(
 	`personagem` int(8) NOT NULL,
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `ew_dialogo` (`id`, `entrada`, `saida`, `personagem`) VALUES
+(1, 'LIFE', '{"0":"grimorio.dizer(seu life he:)","1":"me.life","2":"","3":""}', 0),
+(2, 'LIFE', '{"0":"grimorio.dizer(life = )","1":"me.life","2":"","3":""}', 0),
+(3, 'LIFE', '{"0":"grimorio.dizer( Ã© )","1":"me.life","2":"","3":""}', 0);

@@ -11,9 +11,9 @@
 			global $config;
 			try {
 				$db = new PDO(
-					"mysql:host={$config->db->host};dbname={$config->db->name}",
-					$config->db->user,
-					$config->db->password
+					"mysql:host={$config->db_host};dbname={$config->db_name}",
+					$config->db_user,
+					$config->db_password
 				);
 				$txtQuery = "select now()";
 			} catch (PDOException $e) {
@@ -57,8 +57,8 @@
 			return "Ok!";
 		}
 		function autoConfig(){
-			$sql = file_get_contents("engine2/database.sql");
-			//$this->mePDO->Query($sql);
+			$sql = file_get_contents("engine/database.sql");
+			$this->mePDO->Query($sql);
 			return "Ok!";
 		}
 	}

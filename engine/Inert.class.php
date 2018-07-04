@@ -15,6 +15,7 @@ class Inert extends GameObject{
 		Inert::replace($id,$nome,$desc);
 		return $id;		
 	}
+	/*
 	public function update($id,$x,$y,$heigth,$width,$nome,$desc){
 		global $db;
 		GameObject::update($id,$x,$y,$heigth,$width,"inert");
@@ -22,6 +23,7 @@ class Inert extends GameObject{
 		return $id;
 				
 	}
+	*/
 	static function replace($id,$nome,$desc){
 		global $db;
 		echo $query = "REPLACE INTO `ew_inert` VALUES($id,'$nome','$desc')";
