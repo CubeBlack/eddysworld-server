@@ -4,27 +4,22 @@
 		public $str;
 		public $nodes;
 		public $params;
-		//public $rIntegral;
 	}
 	Class Terminal{
-		//no log, vvalores ue n'ao devem ser salvos no log
-		//como comando apenas para visulizrar dados
-		//mas acho melhor especificar apenas os que v'ao para o log
-		//tipo um inLog
-		//rIntegral, para o caso de querer a resposta no retorno, e n'ao no echo
-		function __construct($vars,$noLog=array(),$rIntegral=false){
+		function __construct($vars,$noLog=array()){
 			$this->vars = $vars;
 			$this->noLog = $noLog;
-			$this->rIntegral = $rIntegral;
 		}
 		function chamada($comStr){
 			$this->com = new TerminalComander();
 			$this->com->str = $comStr;
 			$this->pearce();
-			return $this->call();
+			$this->call();
 		}
 		function setLog(){
-			$filename = 'terminal.log';
+			//por enquanto desativar o log
+			return;
+			$filename = 'engine/terminal.log';
 			if (!$handle = fopen($filename, 'a')) {
 				 echo "Não foi possível abrir o arquivo ($filename)";
 				 exit;
@@ -174,17 +169,22 @@
 				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3]);
 			else if(sizeof($this->com->params)==5)
 				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3],$this->com->params[4]);
+			else if(sizeof($this->com->params)==6)
+				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3],$this->com->params[4],$this->com->params[5]);
+			else if(sizeof($this->com->params)==7)
+				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3],$this->com->params[4],$this->com->params[5],$this->com->params[6]);
+			else if(sizeof($this->com->params)==8)
+				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3],$this->com->params[4],$this->com->params[5],$this->com->params[6],$this->com->params[7]);
+			else if(sizeof($this->com->params)==9)
+				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3],$this->com->params[4],$this->com->params[5],$this->com->params[6],$this->com->params[7],$this->com->params[8]);
+			else if(sizeof($this->com->params)==10)
+				$retorno = $retorno->{$tNode}($this->com->params[0],$this->com->params[1],$this->com->params[2],$this->com->params[3],$this->com->params[4],$this->com->params[5],$this->com->params[6],$this->com->params[7],$this->com->params[8],$this->com->params[9]);
 			
 			else{
 				echo "Erro 014(Terminal.class): Quantidade de parametros nao suportada";
 			}
-
 			goto fim;
-
 			fim:
-			if($this->rIntegral){
-				return $retorno;
-			}
 			if(is_string($retorno)){
 				echo $retorno;
 			}
