@@ -11,6 +11,8 @@ $user = new User();
 $go = $gameObject = new GameObject();
 $inert = new Inert();
 $world = new World();
+$dialogo = new Dialogo();
+$forum = new Forum();
 $grimorio = new Grimorio();
 $me = new Personagem();
 
@@ -33,6 +35,8 @@ $vars = array(
 	"config",
 	"user",
 	"gameObject", "go",
+	"dialogo",
+	"forum",
 	"inert",
 	"db",
 	"world",
@@ -40,4 +44,5 @@ $vars = array(
 	"me",
 	"term"
 );
-$term = New Terminal($vars);
+//$term = New Terminal($vars);
+$term = New Terminal2($vars,true);

@@ -59,6 +59,12 @@
 			}
 			return $retorno;
 		}
+		function get ($rTipo = "arr") {
+			if($rTipo=="json") {
+				return json_encode($this);			
+			}
+			return $this;
+		}
 		function novo(){
 			
 		}

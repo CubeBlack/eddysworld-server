@@ -18,7 +18,7 @@ class Grimorio{
 		$com = $this->entrada($texto);
 		//executar comados do retorno do da pesquisa
 		if($com==null) return "n'ai foi posivel entender";
-		//$this->term->chamada($com);
+		$this->term->chamada($com);
 		return $com;
 	}
 	function dizer($texto=""){
@@ -51,37 +51,9 @@ class Grimorio{
 		}
 		return $retorno;
 	}
-	function dialogos($criterio="",$rTipo=""){
-		global $db;
-		$retorno = $db->tableSelect(Database::dialogoTb,"");
-		if($rTipo = "json"){
-			$retorno = json_encode($retorno);
-		}
-		return $retorno;
-	}
-	function dialogoNovo($entrada, $saida = '{"0":"","1":"","2":"","3":""}', $personagem = 0){
-		global $db;
-		$dados=array(null,Grimorio::simplificar($entrada),$saida,$personagem);
-		$id = $db->tableInsert(Database::dialogoTb,$dados);
-		return $id;
-	}
-	//eModo, he o tipo de entrada: json/array
-	static function DialogoReplace($id,$entrada,$retorno,$personagem, $eModo = "json"){
-		global $db;
-		$entrada = Grimorio::simplificar($entrada);
-		$table = Database::dialogoTb;
-		echo $query = "REPLACE INTO `$table` VALUES($id,'$entrada','$retorno',$personagem)";
-
-		$db->mePDO->query($query);
-	}
-	function entradaEdit(){
-		
-	}
-	function entradaApagar(){
-		//desnecesario
-	}
 	static function simplificar($str){
-		$str = mb_strtoupper($str,'UTF-8');
+		//$str = mb_strtoupper($str,'UTF-8');
+		$str = strtoupper($str);
 		$map = array(
 			'Á' => 'A',
 			'À' => 'A',
@@ -100,9 +72,6 @@ class Grimorio{
 		 
 		$str = strtr($str, $map); // funciona corretamente
 		return $str;
-	}
-	function addUso(){
-		//
 	}
 }
 
