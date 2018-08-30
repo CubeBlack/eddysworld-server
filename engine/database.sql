@@ -49,19 +49,40 @@ CREATE TABLE IF NOT EXISTS `ew_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `ew_user` (`nick`, `email`, `password`, `tipo`) VALUES
-('CubeBlack', 'danie_nerd@hotmail.com', 'Ragnarok13', 4);
+insert into ew_user values
+	(2,'asdf','danie_nerd@hotmail.com','asdf',1,0),
+	(1,'CubeBlack','danie_nerd@hotmail.com','Ragnarok13',4,0)
+;
+
 
 DROP TABLE IF EXISTS `ew_dialogo`;
-CREATE TABLE IF NOT EXISTS `ew_dialogo`(
-	`id` int(8) NOT NULL AUTO_INCREMENT,
-	`entrada` varchar(255) NOT NULL,
-	`saida` varchar(255) NOT NULL,
-	`personagem` int(8) NOT NULL,
-	PRIMARY KEY(`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE `ew_dialogo` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `entrada` varchar(255) NOT NULL,
+  `saida` varchar(255) NOT NULL,
+  `personagem` int(8) NOT NULL,
+  `uso` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
 
-INSERT INTO `ew_dialogo` (`id`, `entrada`, `saida`, `personagem`) VALUES
-(1, 'LIFE', '{"0":"grimorio.dizer(seu life he:)","1":"me.life","2":"","3":""}', 0),
-(2, 'LIFE', '{"0":"grimorio.dizer(life = )","1":"me.life","2":"","3":""}', 0),
-(3, 'LIFE', '{"0":"grimorio.dizer( Ã© )","1":"me.life","2":"","3":""}', 0);
+insert into ew_dialogo values
+	(3,'LIFE','grimorio.dizer(seu life he[])',0,0),
+	(2,'LIFE','grimorio.dizer(he[])',0,0),
+	(1,'LIFE','grimorio.dizer(igla a [])',0,0)
+;
+
+
+DROP TABLE IF EXISTS `ew_forumpost`;
+CREATE TABLE IF NOT EXISTS `ew_forumpost` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `tipo` varchar(100) NOT NULL DEFAULT '',
+  `descricao` varchar(1000) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+
+insert into ew_forumpost values
+	(2,'Introducao','system','asdfasdfasd asdf ds'),
+	(1,'LIFE','dialogo','Empty!')
+;
+

@@ -5,7 +5,9 @@
 			persTb = "ew_pers",
 			inerTb = "ew_inert",
 			dialogoTb = "ew_dialogo",
-			objcTb = "ew_object"
+			objcTb = "ew_object",
+			forumPostTb = "ew_forumpost",
+			forumComentTb = "ew_forumcoment"
 		;
 		function __construct(){
 			global $config;
