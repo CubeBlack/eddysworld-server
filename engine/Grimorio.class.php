@@ -2,6 +2,25 @@
 //require_once"engine2/Termianl.class.php";
 class Grimorio{
 	function __construct(){
+
+	}
+	function ouvir($texto=""){
+		//localizar fraze no bd
+		$texto = Dialogo::simplificar($texto);
+		$com = Dialogo::getByEntrada($texto);
+		//executar comados do retorno do da pesquisa
+		if(!is_array($com)) {
+			return $this->dizer("Não foi posivel entender($com)");
+		};
+		//bagunsa as respostas
+		shuffle($com);
+		if($com[0]["saida"] == "Empty!"){
+			return $this->dizer("Não foi posivel entender(Empty!)");
+		}
+		$retorno = $this->fazer($com[0]["saida"]);
+		return $retorno;
+	}
+	function fazer($com = ""){
 		$vars = array(
 			"user",
 			"gameObject", "go",
@@ -10,45 +29,27 @@ class Grimorio{
 			"grimorio",
 			"me"
 		);
-		$this->term = new Terminal($vars,array(),true);
+		$term = new Terminal2($vars,array(),true);
+		$retorno = $term->chamada($com);
+		return $retorno;
 	}
-	function ouvir($texto=""){
-		//localizar fraze no bd
-		$texto = Grimorio::simplificar($texto);
-		$com = $this->entrada($texto);
-		//executar comados do retorno do da pesquisa
-		if($com==null) return "n'ai foi posivel entender";
-		$this->term->chamada($com);
-		return $com;
+	function dizer($texto="", $user = "Amanda"){
+		return "$user - $texto";
 	}
-	function dizer($texto=""){
-		return $texto;
-	}
-	function entrada($str){
-		global $db;
-		 //array_rand()
-		$retorno = $db->tableSelect(Database::dialogoTb,"WHERE entrada='$str'");
-		if(empty($retorno)){
-			$com = "N'ao foi posivel entender";
-			$neID = $this->dialogoNovo($str);
-			$com .= " ($neID)";
-			return $com;
+	function perceber(){
+		global $me;
+		$retorno = $me->status();
+		$com = "";
+		foreach($retorno as $key => $dado){
+			$com .= "[$key=$dado]";
 		}
-		$this->addUso();
+		$retorno = Dialogo::getByEntrada($com);
 		shuffle($retorno);
-		$saidaStr = $retorno[0]["saida"];
-		$saidaArr = json_decode($saidaStr);
-		$retorno = "";
-		foreach($saidaArr as $com){
-			if($com == "") continue;
-			$retorno .= $this->term->chamada($com);
-			//var_dump($this->term);
-			//var_dump($this->term->chamada($com));
-			//echo $com;
+		if($retorno[0]["saida"] == "Empty!"){
+			return $this->dizer("Não foi posivel entender(Empty!)");
 		}
-		if($retorno == ""){
-			return "N'ao entendi, o que voc;e quis dizer?";
-		}
+		$retorno = $this->fazer($retorno[0]["saida"]);
+		
 		return $retorno;
 	}
 	static function simplificar($str){

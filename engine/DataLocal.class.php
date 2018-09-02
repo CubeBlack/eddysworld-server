@@ -25,7 +25,6 @@
 			$dblStr = "";
 			$dblStr = $_SESSION["DataLocal"];
 			$this->data = json_decode($dblStr);
-			
 		}
 		function clear(){
 			return session_destroy();

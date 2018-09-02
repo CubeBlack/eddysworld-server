@@ -25,12 +25,14 @@
 				$this->nick = $dUser->nick;
 				$this->email = $dUser->email;
 				$this->tUser = $dUser->tUser;
+				$this->personagem = $dUser->personagem;
 			}
 			else{
 				$this->id = 0;
 				$this->nick = "Anonymus" . rand(0,9999);
 				$this->email = "none";
 				$this->tUser = $this::tUser_anonymus;
+				$this->personagem = 0;
 			}
 			$this->acesso = time();
 			$dbl->insert("user",$this);
@@ -52,6 +54,7 @@
 				$this->nick = $retorno[0]["nick"];
 				$this->email = $retorno[0]["email"];
 				$this->tUser = $retorno[0]["tipo"];
+				$this->personagem = $retorno[0]["personagem"];
 				$this->acesso = time();
 				
 				$dbl->insert("user",$this);

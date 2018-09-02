@@ -14,7 +14,7 @@ $world = new World();
 $dialogo = new Dialogo();
 $forum = new Forum();
 $grimorio = new Grimorio();
-$me = new Personagem();
+$me = new Personagem($user->personagem);
 
 // Help
 $help = " --- Ajuda ---
@@ -39,6 +39,7 @@ $vars = array(
 	"forum",
 	"inert",
 	"db",
+	"dbl",
 	"world",
 	"grimorio",
 	"me",
