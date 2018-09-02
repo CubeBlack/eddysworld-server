@@ -66,7 +66,7 @@ class Terminal2{
 						continue;	
 					}
 					///------
-					if(strlen($comStr)>9){
+					if(strlen($get)>9){
 						if(
 							$comStr[$i-8] == "s"&
 							$comStr[$i-7] == "t"&
@@ -166,6 +166,18 @@ class Terminal2{
 					case 1: $retorno[] = $var->{$uNod}($com["params"][0]);
 						break;
 					case 2: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1]);
+						break;
+					case 3: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1],$com["params"][2]);
+						break;
+					case 4: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1],$com["params"][2],$com["params"][3]);
+						break;
+					case 5: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1],$com["params"][2],$com["params"][3],$com["params"][4]);
+						break;
+					case 6: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1],$com["params"][2],$com["params"][3],$com["params"][4],$com["params"][5]);
+						break;
+					case 7: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1],$com["params"][2],$com["params"][3],$com["params"][4],$com["params"][5],$com["params"][6]);
+						break;
+					case 8: $retorno[] = $var->{$uNod}($com["params"][0],$com["params"][1],$com["params"][2],$com["params"][3],$com["params"][4],$com["params"][5],$com["params"][6],$com["params"][7]);
 						break;
 					default: $retorno[] = "Erro = Numero de parametros nao suportado pelo terminal";
 						break;

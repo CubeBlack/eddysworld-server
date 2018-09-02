@@ -26,7 +26,7 @@ class Inert extends GameObject{
 	
 	static function replace($id,$nome,$desc){
 		global $db;
-		echo $query = "REPLACE INTO `ew_inert` VALUES($id,'$nome','$desc')";
+		$query = "REPLACE INTO `ew_inert` VALUES($id,'$nome','$desc')";
 
 		$db->mePDO->query($query);
 	}

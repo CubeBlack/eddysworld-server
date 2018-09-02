@@ -7,7 +7,7 @@
 		}
 		static function add($x,$y,$heigth,$width,$tipo="null"){
 			global $db;
-			$dados=array(null,$x,$y,$heigth,$width,$tipo);
+			$dados=array("null",$x,$y,$heigth,$width,$tipo);
 			$id = $db->tableInsert(Database::objcTb,$dados);
 			return $id;
 		}

@@ -29,6 +29,10 @@
 		  $query = "";
 		  $query .= "INSERT INTO `$table` VALUES(";
 		  for ($i = 0; $i < count($values) - 1; $i++) {
+			if($values[$i] == null||$values[$i] == "null"){
+				$query .= "null,";
+				continue;
+			}
 			$query .= "'{$values[$i]}',";
 		  }
 		  $query .= "'{$values[$i]}'";
