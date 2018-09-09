@@ -47,8 +47,9 @@
 			  SELECT * FROM `$table`
 			  $parametro
 			  ORDER BY id DESC
-			  LIMIT 10
+			  
 		  ";
+			//LIMIT 10
 		  $results = $this->mePDO->query($query);
 		  if($config->show_error){
 			$error = $this->mePDO->errorInfo(); 

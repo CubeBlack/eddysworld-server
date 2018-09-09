@@ -2,6 +2,7 @@
 class Personagem extends GameObject{
 	function __construct($id=0){
 		$this->id=$id;
+		$this->status=array();
 		if($id!=0){
 			$objPer = $this->getById($id);
 			
@@ -19,14 +20,24 @@ class Personagem extends GameObject{
 	public function status(){
 		global $dbl;
 		$retorno = array();
-		//$retorno=$this->statusT();
-		if($this->id!=0) $retorno["logued"] = "false";
-			else $retorno["logued"] = "true";
+		$retorno=$this->statusT();
+		//var_dump($retorno);
+		if($this->id != 0){ 
+			$retorno["logued"] = "true";
+		}
+		else 
+			$retorno["logued"] = "false";
+		
+
 		return $retorno;
 	}
 	public function statusT(){
 		global $dbl;
-		//return $bdl->data["per0"];
+		//$dbl = new DataLocal();
+		//$retono = $dbl
+		//var_dump($dbl->data->per0);
+		if(!isset($dbl->data->per)) return array();
+		return (array)$dbl->data->per->status;
 	}
 	public function getById($id){
 
@@ -35,9 +46,13 @@ class Personagem extends GameObject{
 		
 	}
 	public function setStatusT($chave,$valor){
-		global $bdl;
-		$aStatus = $this->statusT();
-		$aStatus[$chave]=$valor;
-		//$dbl->insert("per0",$aStatus);
+		//global $dbl;
+		$dbl = new DataLocal();
+		$this->status = $this->statusT();
+		$this->status[$chave]=$valor;
+		$dbl->insert("per",$this);
+		//var_dump($bdl);
+		//$dbl->insert("per0","jurema");
+		return;
 	}
 }

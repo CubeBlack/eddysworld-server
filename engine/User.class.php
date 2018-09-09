@@ -76,5 +76,11 @@
 			return $dbl->clear();
 			
 		}
+		function loginByWeit(){
+			$user = $grimorio->getWeited("user");
+			$pass = $grimorio->getWeited("pass");
+			$this->login($user,$pass);
+		} 
 	}
 	
+

@@ -15,10 +15,15 @@ class Dialogo{
 			Dialogo::addUso($retorno[0]["id"]);
 		}
 		else{
-			var_dump($retorno);
+			//var_dump($retorno);
 			return Dialogo::novo($str);
 			//Retorar saida de dialogo inesesetente
 		}
+		return $retorno;
+	}
+	static function getById($id){
+		global $db;
+		$retorno = $db->tableSelect(Database::dialogoTb,"WHERE id='$id'")[0];
 		return $retorno;
 	}
 	static function getByEntradaLike($str){
@@ -32,7 +37,7 @@ class Dialogo{
 			Dialogo::addUso($retorno[0]["id"]);
 		}
 		else{
-			var_dump($retorno);
+			//var_dump($retorno);
 			return Dialogo::novo($str);
 			//Retorar saida de dialogo inesesetente
 		}
@@ -40,7 +45,10 @@ class Dialogo{
 	}
 	function listar($criterio="",$rTipo="arr"){
 		global $db;
-		$retorno = $db->tableSelect(Database::dialogoTb,"");
+		$query = "SELECT DISTINCT entrada, count(*), sum(uso) from ew_dialogo group by entrada, uso order by sum(uso) desc;";
+		//$retorno = $db->tableSelect(Database::dialogoTb,"");
+		
+		$retorno = $db->mePDO->query($query)->fetchAll();
 		//var_dump($retorno);
 		if($rTipo=="json") return json_encode($retorno);
 		return $retorno;
@@ -58,7 +66,7 @@ class Dialogo{
 		global $db;
 		$entrada = Grimorio::simplificar($entrada);
 		$table = Database::dialogoTb;
-		echo $query = "REPLACE INTO `$table` VALUES($id,'$entrada','$retorno',$personagem)";
+		$query = "REPLACE INTO `$table` VALUES($id,'$entrada','$retorno',$personagem)";
 
 		$db->mePDO->query($query);
 	}
@@ -87,8 +95,13 @@ class Dialogo{
 		$str = strtr($str, $map); // funciona corretamente
 		return $str;
 	}
-	function addUso(){
-		//
+	static function addUso($id){
+		global $db;
+		$dialogo = Dialogo::getById($id);
+		$aUso = $dialogo["uso"];
+		$aUso++;
+		$query = "update `ew_dialogo` set `uso`='$aUso' where `id`='$id' limit 1";
+		$db->mePDO->query($query);
 	}
 }
 

@@ -1,7 +1,7 @@
 <?php
 global $user;
 class Terminal2{
-	public function __construct($vars,$echo){
+	public function __construct($vars,$echo=true){
 		$this->vars = $vars;
 		$this->echo = $echo;
 	}
@@ -190,6 +190,7 @@ class Terminal2{
 		}
 		if(sizeof($retorno)==0) $retorno = "Empty!";
 		if(sizeof($retorno)==1) $retorno = $retorno[0];
+		//$retorno["type"] = "RetornoList";
 		return $retorno;
 	}
 }
