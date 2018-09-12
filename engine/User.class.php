@@ -42,7 +42,7 @@
 			return $this->id > 0;
 		}
 		function login($user, $password){
-			global $dbl, $db;
+			global $dbl, $db,$grimorio;
 			//seguranca do banco de dados
 			$user = urlencode($user);
 			$password = urldecode($password);
@@ -58,9 +58,10 @@
 				$this->acesso = time();
 				
 				$dbl->insert("user",$this);
+				$grimorio->weitClear();
 				return true;
 			}
-			return $retorno;
+			return $this;
 		}
 		function get ($rTipo = "arr") {
 			if($rTipo=="json") {

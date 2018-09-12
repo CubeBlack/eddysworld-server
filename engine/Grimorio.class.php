@@ -28,6 +28,7 @@ class Grimorio{
 		return $retorno;
 	}
 	function fazer($com = ""){
+
 		$vars = array(
 			"user",
 			"gameObject", "go",

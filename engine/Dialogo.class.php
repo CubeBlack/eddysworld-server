@@ -4,6 +4,13 @@ class Dialogo{
 	function __construct(){
 
 	}
+	public function getByTitle($title,$rTipo = "arr"){
+		//echo "|$rTipo|";
+		$retorno = Dialogo::getByEntrada($title);
+		if($rTipo == "json")
+			$retorno = json_encode($retorno);
+		return $retorno;
+	}
 	static function getByEntrada($str){
 		global $db;
 		 //array_rand()

@@ -28,6 +28,10 @@ class Terminal2{
 			for($i = 0; $i < strlen($comStr);$i++){
 				//----- getnos -- 
 				if($tGet=="node") {
+					//ignorar linha e espacos
+					if($comStr[$i] == " "||$comStr[$i] == "\n"){
+						continue;
+					}
 					if($comStr[$i]==".") {
 						if($get!="") $nods[] = $get;
 						$get = "";
@@ -55,6 +59,7 @@ class Terminal2{
 				if($tGet=="param") {
 					if($comStr[$i]==",") {
 						if($get!="") $params[] = $get;
+						//$params[] = $get;
 						$get = "";
 						continue;			
 					}
@@ -66,7 +71,7 @@ class Terminal2{
 						continue;	
 					}
 					///------
-					if(strlen($get)>9){
+					if(strlen($get)>7){
 						if(
 							$comStr[$i-8] == "s"&
 							$comStr[$i-7] == "t"&
@@ -98,7 +103,8 @@ class Terminal2{
 							$comStr[$i-0] == "d"){
 							$tGet = "param";
 							$get = substr($get,0,-6);
-							if($get!="") $params[] = $get;
+							//if($get!="") $params[] = $get;
+							$params[] = $get;
 							$get = "";
 							continue;
 						}
