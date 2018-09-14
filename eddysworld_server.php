@@ -15,6 +15,7 @@ $dialogo = new Dialogo();
 $forum = new Forum();
 $grimorio = new Grimorio();
 $me = new Personagem($user->personagem);
+$quest = new Quest();
 
 // Help
 $help = " --- Ajuda ---
@@ -43,7 +44,8 @@ $vars = array(
 	"world",
 	"grimorio",
 	"me",
-	"term"
+	"term",
+	"quest"
 );
 //$term = New Terminal($vars);
 $term = New Terminal2($vars,true);
