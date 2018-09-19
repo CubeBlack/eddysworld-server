@@ -1,1 +1,1 @@
- mysqldump -u root -p lima >dump.sql
+mysqldump -u root -p lima >dump.sql

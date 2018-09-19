@@ -31,7 +31,7 @@ class Personagem extends GameObject{
 
 		return $retorno;
 	}
-	public function statusT(){
+	public function statusT($rTipo = ""){
 		global $dbl;
 		//$dbl = new DataLocal();
 		//$retono = $dbl
@@ -53,6 +53,7 @@ class Personagem extends GameObject{
 		$dbl->insert("per",$this);
 		//var_dump($bdl);
 		//$dbl->insert("per0","jurema");
-		return;
+		//retonar nada, para não aparescer na resposta
+		return "";
 	}
 }

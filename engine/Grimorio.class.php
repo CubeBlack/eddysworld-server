@@ -11,7 +11,8 @@ class Grimorio{
 				$texto = substr($texto,1);
 				return $this->fazer($texto);
 			}
-			
+		//Caso esteja respondendo algo
+		//if() {
 		//localizar fraze no bd
 		$texto = Dialogo::simplificar($texto);
 		$com = Dialogo::getByEntrada($texto);
@@ -34,7 +35,7 @@ class Grimorio{
 			"gameObject", "go",
 			"inert",
 			"world",
-			"grimorio",
+			"grimorio","gri",
 			"me"
 		);
 		$term = new Terminal2($vars,array(),false);
@@ -90,7 +91,7 @@ class Grimorio{
 	}
 	function getWeites(){
 		global $dbl;
-		if($dbl->data->weit!==null) return array();
+		if(!isset($dbl->data->weit)) return array();
 		return (array)$dbl->data->weit;
 	}
 	function getWeited($index){
@@ -98,12 +99,19 @@ class Grimorio{
 		if($dbl->data->weit->${$index}!==null) return null;
 		return $dbl->data->weit->${$index};
 	}
-	function weitClear(){
-		$dbl = new DataLocal();
-		$weit = $this->getWeites();
-		$weit[$index]=null;
-		$dbl->insert("weit",$weit);
+	function weiting($i) {
+		//if
 	}
+	function setQuestion(){
+		//$this.setWeit("question");
+		return "";
+	}
+	function weitClear(){
+		//$dbl = new DataLocal();
+		//$weit = $this->getWeites();
+		//$weit[$index]=null;
+		//$dbl->insert("weit",array());
+	} 
 	static function simplificar($str){
 		//$str = mb_strtoupper($str,'UTF-8');
 		$str = strtoupper($str);

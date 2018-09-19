@@ -18,9 +18,8 @@
 		
 		function __construct(){
 			global $dbl;
-			if(isset($dbl->data->user)){
-				$dUser = $dbl->data->user;
-				
+			if(isset($dbl->get()["user"])){
+				$dUser = $dbl->get()["user"];
 				$this->id = $dUser->id;
 				$this->nick = $dUser->nick;
 				$this->email = $dUser->email;
@@ -35,6 +34,7 @@
 				$this->personagem = 0;
 			}
 			$this->acesso = time();
+			//var_dump($this);
 			$dbl->insert("user",$this);
 			
 		}
@@ -58,7 +58,7 @@
 				$this->acesso = time();
 				
 				$dbl->insert("user",$this);
-				$grimorio->weitClear();
+				//$grimorio->weitClear();
 				return true;
 			}
 			return $this;

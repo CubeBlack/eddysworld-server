@@ -77,11 +77,22 @@ class Dialogo{
 
 		$db->mePDO->query($query);
 	}
+	public function setSaida($id,$saida){
+		global $db;
+		//UPDATE `lima`.`ew_dialogo` SET `saida`='gri.dizer(é uma letra);' WHERE `id`='29';
+		$query = "UPDATE `ew_dialogo` SET `saida`='$saida' WHERE `id`='$id';";
+		$retorno = $db->mePDO->query($query);
+		return $retorno;
+	}
 	function drop(){
 		//desnecesario
 	}
 	static function simplificar($str){
-		$str = mb_strtoupper($str,'UTF-8');
+		// sudo apt install php7.0-mbstring
+		// var_dump($str);
+		$str = mb_strtoupper($str);
+		//$str = strtoupper($str);
+		
 		$map = array(
 			'Á' => 'A',
 			'À' => 'A',

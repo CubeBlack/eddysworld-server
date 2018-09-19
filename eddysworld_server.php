@@ -13,7 +13,8 @@ $inert = new Inert();
 $world = new World();
 $dialogo = new Dialogo();
 $forum = new Forum();
-$grimorio = new Grimorio();
+$gri = $grimorio = new Grimorio();
+
 $me = new Personagem($user->personagem);
 $quest = new Quest();
 
@@ -42,7 +43,7 @@ $vars = array(
 	"db",
 	"dbl",
 	"world",
-	"grimorio",
+	"grimorio", "gri",
 	"me",
 	"term",
 	"quest"
