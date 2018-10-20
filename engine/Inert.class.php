@@ -3,6 +3,7 @@ class Inert extends GameObject{
 	static function byDatabase($id, $base){
 		global $db;
 		$retorno = $db->tableSelect(Database::inerTb,"WHERE id='$id'");
+        //pra que o foreach?
 		foreach($retorno as $l){
 			$base->name = $l["name"];
 			$base->descricao = $l["descricao"];

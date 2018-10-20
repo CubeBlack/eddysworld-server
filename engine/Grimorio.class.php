@@ -2,7 +2,7 @@
 //require_once"engine2/Termianl.class.php";
 class Grimorio{
 	function __construct(){
-
+        
 	}
 	function ouvir($texto=""){
 		//Caso se esteja tentando executar um comando
@@ -12,7 +12,17 @@ class Grimorio{
 				return $this->fazer($texto);
 			}
 		//Caso esteja respondendo algo
-		//if() {
+		if($this->esperandoResposta()) {
+            //procurar  
+            $com = Dialogo::getByEntrada("[weit=resposta][resposta=0][valor=$texto]");
+            if($texto = "Empty!"){
+                $com = Dialogo::getByEntrada("[weit=resposta][resposta=0]");
+            }
+            goto fim;
+        }
+        if($texto = "Empty!"){
+            return $this->dizer("Resposta desconhecida");;
+        }
 		//localizar fraze no bd
 		$texto = Dialogo::simplificar($texto);
 		$com = Dialogo::getByEntrada($texto);
@@ -21,6 +31,7 @@ class Grimorio{
 			return $this->dizer("Não foi posivel entender($com)");
 		};
 		//bagunsa as respostas
+        fim:
 		shuffle($com);
 		if($com[0]["saida"] == "Empty!"){
 			return $this->dizer("Não foi posivel entender(Empty!)");
@@ -73,6 +84,7 @@ class Grimorio{
 		$retorno = $this->fazer($retorno[0]["saida"]);
 		return $retorno;
 	}
+    
 	function setWeit($index){
 		//global $dbl;
 		$dbl = new DataLocal();
@@ -96,22 +108,38 @@ class Grimorio{
 	}
 	function getWeited($index){
 		global $dbl;
-		if($dbl->data->weit->${$index}!==null) return null;
+        //var_dump($dbl->get());
+        //$data = $dbl->get();
+        //if(isset($data->weit))
+        //var_dump($data);
+		//if($dbl->data->weit->${$index}!==null) return null;
+        
 		return $dbl->data->weit->${$index};
 	}
 	function weiting($i) {
 		//if
 	}
 	function setQuestion(){
-		//$this.setWeit("question");
-		return "";
+
 	}
 	function weitClear(){
 		//$dbl = new DataLocal();
 		//$weit = $this->getWeites();
 		//$weit[$index]=null;
 		//$dbl->insert("weit",array());
-	} 
+	}
+    function esperandoResposta(){
+		$resposta = $this->getWeited("pergunta");
+        //var_dump($resposta);
+		//return $resposta;
+    }
+    function esperarResposta($respostaId){
+        $this->setWeit("pergunta");
+        $this->setValue($respostaId);
+    }
+    function respondido(){
+        return "[respondido]";
+    }
 	static function simplificar($str){
 		//$str = mb_strtoupper($str,'UTF-8');
 		$str = strtoupper($str);
@@ -135,4 +163,3 @@ class Grimorio{
 		return $str;
 	}
 }
-

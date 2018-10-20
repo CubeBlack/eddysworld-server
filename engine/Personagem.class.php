@@ -1,21 +1,7 @@
 <?php
 class Personagem extends GameObject{
 	function __construct($id=0){
-		$this->id=$id;
-		$this->status=array();
-		if($id!=0){
-			$objPer = $this->getById($id);
-			
-			
-		}
-		else{
-			$this->id = 0;
-			$this->name = "none";
-			$this->life = 100;
-			$this->magi = 100;
-			$this->stamina = 100;
-		}
-
+        $this->id = $id;
 	}
 	public function status(){
 		global $dbl;
@@ -31,29 +17,98 @@ class Personagem extends GameObject{
 
 		return $retorno;
 	}
+    public function me($rTipo = "arr"){
+        $go = $this->get($this->id);
+        $retorno = $this->getById($this->id);
+        $retorno["position"] = $go->position;
+        if($rTipo=="json") $retorno = json_encode($retorno);
+        return $retorno;
+    }
 	public function statusT($rTipo = ""){
 		global $dbl;
-		//$dbl = new DataLocal();
-		//$retono = $dbl
-		//var_dump($dbl->data->per0);
-		if(!isset($dbl->data->per)) return array();
-		return (array)$dbl->data->per->status;
+        $data = $dbl->get();
+        //var_dump($data["status"]);
+		if(!isset($data["status"])) return array();
+		return (array)$data["status"];
 	}
-	public function getById($id){
-
+	public function getById($id,$rTipo = "arr"){
+        global $db;
+        $retorno = array();
+        $obj = $db->tableSelect("ew_personagem","WHERE `id`='$id'")[0];
+        //$retorno = GameObject::ofDatabase($obj);
+        $retorno = $obj;
+        if($rTipo=="json") $retorno = json_encode($retorno);
+        return $retorno;
+        
 	}
 	public function setStatusF(){
 		
 	}
 	public function setStatusT($chave,$valor){
-		//global $dbl;
-		$dbl = new DataLocal();
-		$this->status = $this->statusT();
-		$this->status[$chave]=$valor;
-		$dbl->insert("per",$this);
-		//var_dump($bdl);
-		//$dbl->insert("per0","jurema");
-		//retonar nada, para não aparescer na resposta
-		return "";
+		global $dbl;
+		$status = $this->statusT();
+		$status[$chave]=$valor;
+		$retorno = $dbl->set("status",$status);
+
+		return $retorno;
 	}
+    public function nome(){
+        return $this->me()["name"];
+    }
+    //Valores
+    function magi(){
+        return 100;
+    }
+    function speed(){
+        return 0.1;
+    }
+    function strong(){
+        return 100;
+    }
+    function life(){
+        return 100;
+    }
+    // ------------ ações
+    public function andar(){
+        $this->translate(0,$this->speed());
+        
+        return "Ok!";
+    }
+    public function parar(){
+        $this->stop();
+        global $ato;
+    }
+    public function atacar(){
+        
+    }
+    public function fugir(){
+        
+    }
+    public function pegar(){
+        
+    }
+    public function ver(){
+        
+    }
+    static function byDatabase($id, $base){
+		global $db;
+		$retorno = $db->tableSelect("ew_personagem","WHERE `id`='$id'")[0];
+        $base->name = $retorno["name"];
+        return $base;
+    }
+    
+//------------
+public $help = "
+=== Personagem(iniciado como 'me') === 
+-- Valores --
+.nome()
+.magi()
+.speed()
+.strong()
+-- Ações --
+.atacar()
+.fugir()
+.pegar()
+*
+";
 }

@@ -1,4 +1,9 @@
 <?php
+/*
+//ter todos estes dados na memoria do servidor é totalmente desnecesario
+melhor gastar procesamento pra "pegalos" toda vez que nescesario.
+
+*/
 	class User{
 		const 
 			tUser_excluido = -1,
@@ -38,6 +43,9 @@
 			$dbl->insert("user",$this);
 			
 		}
+        function perId(){
+            return $this->personagem;
+        }
 		function logued(){
 			return $this->id > 0;
 		}
@@ -81,7 +89,17 @@
 			$user = $grimorio->getWeited("user");
 			$pass = $grimorio->getWeited("pass");
 			$this->login($user,$pass);
-		} 
+		}
+        public $heelp = "
+=== User(user) ===
+.perId() as intiger
+.logued() as boolean
+.login() as string[Ok!|Fail!]
+.get() as array
+.novo()
+.sair()
+.loginByWeit()
+        ";
 	}
 	
 

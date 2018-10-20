@@ -13,11 +13,15 @@ $inert = new Inert();
 $world = new World();
 $dialogo = new Dialogo();
 $forum = new Forum();
-$gri = $grimorio = new Grimorio();
+$gri = $grimorio = new Grimorio2();
+$wiki = new Wiki();
 
-$me = new Personagem($user->personagem);
+$me = new Personagem($user->perId());
 $quest = new Quest();
-
+$atos = new Atos();
+//sempre executar os antos pendentes
+//padrão de 10 atospor vez, para não demorar o retorno
+//$atos->exe(10);
 // Help
 $help = " --- Ajuda ---
 Variaveis Globais(Objetos):
@@ -39,6 +43,7 @@ $vars = array(
 	"gameObject", "go",
 	"dialogo",
 	"forum",
+	"wiki",
 	"inert",
 	"db",
 	"dbl",
@@ -46,7 +51,8 @@ $vars = array(
 	"grimorio", "gri",
 	"me",
 	"term",
-	"quest"
+	"quest",
+    "atos"
 );
 //$term = New Terminal($vars);
 $term = New Terminal2($vars,true);
