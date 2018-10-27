@@ -10,6 +10,7 @@
 				$_SESSION["DataLocal"] = json_encode(array());
 			}
 		}
+        
 		function insert($valueName, $value){
 			$data = $this->get();
 			$data[$valueName] = $value;
@@ -46,4 +47,3 @@
 .get() as array
 ";
 	}
-	

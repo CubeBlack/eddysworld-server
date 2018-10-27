@@ -3,7 +3,8 @@
 		function __construct(){
 			$this->gameObject = array();
 		}
-		function show($tRetorno="obj"){
+        
+		function show($tRetorno="obj", $position="me",$filtro=""){
 			$retorno = GameObject::findByLocation("");
 			switch($tRetorno){
 				case "obj":

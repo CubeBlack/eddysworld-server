@@ -4,6 +4,7 @@
 			$this->go_id = 0;
 			$this->position = new Vector2();
 			$this->tamanho = new vector2();
+            $this->angle = 0;
 		}
 		static function add($x,$y,$heigth,$width,$tipo="null"){
 			global $db;
@@ -32,6 +33,9 @@
             if($indice == "y"||$indice == "Y")$retorno = $retorno->y;
             return $retorno;
         }
+        public function getAngle(){
+            return $this->get($this->id)->angle;
+        }
         public function getPositionById($id,$indice=""){
             //se o id for 0, retornar posicao zerada
             $retorno = $this->get($id)->position;
@@ -55,13 +59,17 @@
 		static function findByName(){
 			
 		}
-		static function findByLocation($location){
-			global $db;
+		static function findByLocation($location = null, $area=null){
+            global $db, $me;
+            $meId = $me->id();
 			$retorno = array();
             // x > [x] , bla, bla, bla
 			$table = $db->tableSelect(Database::objcTb,"");
 			foreach($table as $key => $row){
-				$retorno[] = GameObject::ofDatabase($row) ;
+                $thisObj = GameObject::ofDatabase($row);
+                if($thisObj->go_id == $meId) $thisObj->itsme = true;
+                    else $thisObj->itsme = false;
+				$retorno[] = $thisObj ;
 			}
 			return $retorno;
 		}
@@ -71,20 +79,20 @@
 			
 			$nGo->go_id = $objArr["id"];
 				$np = new Vector2();
-				$np->x = $objArr["x"];
-				$np->y = $objArr["y"];
+				$np->x = (float)$objArr["x"];
+				$np->y = (float)$objArr["y"];
 			$nGo->position = $np;
 				$nt = new Vector2();
 				$nt->x = $objArr["w"];
 				$nt->y = $objArr["h"];
 			$nGo->tamanho = $nt;
 			$nGo->tipo = $objArr["tipo"];
-            
+            $nGo->angle = $objArr["a"];
             if($nGo->tipo=="personagem" ){
                 //echo "aqui";
                 $nGo = Personagem::byDatabase($nGo->go_id,$nGo);
             }
-            if($nGo->tipo=="inert"){
+            else if($nGo->tipo=="inert"){
                 //echo "ali";
 				$nGo = Inert::byDatabase($nGo->go_id,$nGo);
 			}
@@ -93,8 +101,10 @@
 		}
         function transform($x,$y){
             $pos = $this->getPosition();
+            
             $posx = $pos->x+$x;
             $posy = $pos->y+$y;
+            
             $this->setPosition($this->id,$posx,$posy);
             return "Ok!";
         }
@@ -102,6 +112,7 @@
             $pos = $this->getPositionById($id);
             $posx = $pos->x+$x;
             $posy = $pos->y+$y;
+            //echo "{$pos->y}+{$y}={$posy}";
             $this->setPosition($id,$posx,$posy);
             return "Ok!";
         }
@@ -111,7 +122,7 @@
             return $atos->set($str,0);
         }
         function rotate($angle){
-            
+            return $this->getAngle();
         }
         function rotation($angle){
             

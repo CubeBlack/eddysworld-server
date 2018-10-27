@@ -52,21 +52,30 @@ class Personagem extends GameObject{
 
 		return $retorno;
 	}
+    public function id(){
+        return $this->me()["id"];
+    }
     public function nome(){
         return $this->me()["name"];
     }
     //Valores
-    function magi(){
-        return 100;
+    function manaA(){
+        return $this->me()["manaA"];
+    }
+    function manaM(){
+        return $this->me()["manaM"];
     }
     function speed(){
-        return 0.1;
+        return $this->me()["speed"];
     }
     function strong(){
         return 100;
     }
     function life(){
         return 100;
+    }
+    function  position(){
+        return $this->me()["position"];
     }
     // ------------ ações
     public function andar(){

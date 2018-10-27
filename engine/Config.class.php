@@ -1,6 +1,8 @@
 <?php
 class Config{
   public function __construct(){
+        $this->message_token = "EAAewovCZBxXEBANZCv46Es8nmdMUU2ZA26y5aZBq7ZAc8QFtZAlVI4POUrzTQLiZAkNpHmfBV5SNHPyErLjjeMPHX2qVSlZBufZBBvUkrbwTC5p6P40ZAwEnfy8ILhonb0Y9hbvJKgfV1ha4mcXrzOjGU4tVQSh0D2s0QZBZA2iJoZB1eOed8WtvxPZBGb";
+      $this->message_webhookcode = "mamaeamameurevolver";
 	if(file_exists("../config_server.php")){
 		require_once "../config_server.php";
 		$this->show_error = true;
